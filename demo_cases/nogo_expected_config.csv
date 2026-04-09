@@ -1,0 +1,12 @@
+field,expected_value
+project_name,FWA-3080
+system_level,FWA3080R00A1R-ES
+cpu,EPYC 9354P
+memory,256GB DDR5
+storage,1TB NVMe
+BIOS,0.09
+BMC,1.08
+FPGA,0.05
+BL,0.40
+BMCONF,0.09
+NVRAM,1

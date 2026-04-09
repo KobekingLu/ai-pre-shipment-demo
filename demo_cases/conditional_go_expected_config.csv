@@ -1,0 +1,11 @@
+field,expected_value
+project_name,SKY-821E3
+system_level,SKY-821E3-ES
+cpu,EPYC 9655
+memory,512GB DDR5
+storage,2TB NVMe
+BIOS,2.10
+BMC,1.00
+FPGA,0.20
+BL,0.42
+BMCONF,1.12

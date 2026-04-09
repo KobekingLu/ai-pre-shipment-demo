@@ -1,0 +1,13 @@
+System Snapshot
+Project: FWA-3080
+System Level: FWA3080R00A1R-ES
+CPU: EPYC 9354P
+Memory: 256GB DDR5
+Storage: 1TB NVMe
+BIOS: 0.15
+BMC: 1.08
+FPGA: 0.05
+BL: 0.40
+BMCONF: 0.09
+NVRAM: 2.00
+BMC_IP: 10.234.147.1

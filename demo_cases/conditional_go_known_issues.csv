@@ -1,0 +1,2 @@
+item,type,description,status,level,resolution,affected_component,affected_version_or_condition
+1,BIOS,Boot logo scaling issue,Open,Minor,Workaround available,BIOS,2.10

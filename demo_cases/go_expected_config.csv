@@ -1,0 +1,11 @@
+field,expected_value
+project_name,FWA-5080
+system_level,FWA5080R00A1R-ES
+cpu,EPYC 9355P
+memory,128GB DDR5
+storage,1TB NVMe
+BIOS,1.20
+BMC,0.92
+FPGA,0.18
+BL,0.40
+BMCONF,1.10

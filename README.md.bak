@@ -1,0 +1,79 @@
+# AI Pre-Shipment Risk Decision Agent
+
+This project is a demo prototype for an internal AI competition.
+
+Goal:
+Build a runnable demo that helps inspect actual system information, compare with tracking sheet, check known issues, and generate shipment recommendation.
+
+Current focus:
+- inspect input Excel files
+- build minimal parser
+- generate first runnable prototype
+
+## Version 1 structure
+
+- `input_data/`: real PM / AE Excel reference files
+- `demo_cases/`: fake GO / Conditional Go / No-Go scenario files
+- `output/`: generated JSON reports
+- `pre_shipment/xlsx_reader.py`: dependency-free `.xlsx` reader
+- `pre_shipment/parser.py`: sheet inspection and field extraction
+- `pre_shipment/demo_case_parser.py`: lightweight parser for fake demo scenarios
+- `pre_shipment/decision.py`: simple mismatch and risk rules
+- `pre_shipment/html_report.py`: human-readable HTML overview and detail pages
+- `pre_shipment/mapping.py`: sheet hints and field aliases
+- `demo.py`: runnable end-to-end prototype
+
+## Field mapping plan
+
+Expected configuration:
+- source sheet: usually `MS1 Schedule`
+- fields: `project_name`, `system_level`, `cpu_board`, `hardware_items`, `firmware_versions`
+
+Actual system / firmware information:
+- source sheet: usually `MS4_sysinfo_*`
+- fields: `product_name`, `product_part_number`, `board_part_number`, `product_version`, `firmware_versions`, `bmc_ip_address`, `bmc_mac_address`
+
+Known issues:
+- source sheet: usually `Known issue`
+- fields: `item`, `type`, `description`, `status`, `level`, `resolution`, `target_date`
+
+## Current workbook observations
+
+- `AE_ES_Tracking_FWA-3080.xlsx`
+  - `MS1 Schedule` looks like expected configuration and planned firmware versions
+  - `MS4_sysinfo_ESE0425246` looks like actual firmware / FRU / LAN information
+  - `Known issue` is the project known issue list
+- `PM_ES_Tracking_SKY-721E3.xlsx`
+  - `MS1 Schedule` looks like expected configuration
+  - there is no clear actual sysinfo sheet in this workbook
+  - there is no clear known issue sheet in this workbook
+
+The PM and AE files appear to be for different projects, so version 1 analyzes each workbook independently instead of forcing them into a single shipment record.
+
+## Run
+
+```powershell
+python demo.py
+```
+
+The script prints a summary and writes JSON reports into `output/`.
+
+It also generates HTML reports for demo use:
+- `output/html/index.html`: overview page
+- `output/html/*.html`: one detail page per workbook
+
+## Demo cases
+
+The project now supports two input styles in the same run:
+- real Excel workbooks under `input_data/`
+- fake scenario files under `demo_cases/`
+
+Each fake demo case uses:
+- `*_expected_config.csv`
+- `*_actual_sysinfo.txt`
+- `*_known_issues.csv`
+
+The current fake scenarios are designed to show:
+- `GO`
+- `Conditional Go`
+- `No-Go`

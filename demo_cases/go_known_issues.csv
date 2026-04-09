@@ -1,0 +1,3 @@
+item,type,description,status,level,resolution,affected_component,affected_version_or_condition
+1,BIOS,Legacy BIOS menu text alignment issue,Closed,Minor,Fixed in BIOS 1.18,BIOS,<1.18
+2,BMC,Old sensor label wording,Closed,Minor,Fixed in BMC 0.90,BMC,<0.90

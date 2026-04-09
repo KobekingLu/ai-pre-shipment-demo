@@ -1,0 +1,309 @@
+{
+  "profile_name": "SKY642E3 restricted read-only collection",
+  "case_id": "SKY642E3",
+  "remote_sandbox_root": "/tmp/ai_pre_shipment_demo/",
+  "notes": [
+    "This profile keeps collection read-focused and avoids package, service, disk, or firmware write operations.",
+    "ipmitool commands are optional and may fail on some environments without stopping the whole collection."
+  ],
+  "commands": [
+    {
+      "id": "product_name",
+      "type": "command",
+      "argv": [
+        "cat",
+        "/sys/class/dmi/id/product_name"
+      ],
+      "collect_as": {
+        "kind": "single_line",
+        "target": "product_name"
+      }
+    },
+    {
+      "id": "product_part_number",
+      "type": "command",
+      "argv": [
+        "cat",
+        "/sys/class/dmi/id/product_sku"
+      ],
+      "collect_as": {
+        "kind": "single_line",
+        "target": "product_part_number"
+      }
+    },
+    {
+      "id": "product_version",
+      "type": "command",
+      "argv": [
+        "cat",
+        "/sys/class/dmi/id/product_version"
+      ],
+      "collect_as": {
+        "kind": "single_line",
+        "target": "product_version"
+      }
+    },
+    {
+      "id": "board_part_number",
+      "type": "command",
+      "argv": [
+        "cat",
+        "/sys/class/dmi/id/board_name"
+      ],
+      "collect_as": {
+        "kind": "single_line",
+        "target": "board_part_number"
+      }
+    },
+    {
+      "id": "bios_version",
+      "type": "command",
+      "argv": [
+        "cat",
+        "/sys/class/dmi/id/bios_version"
+      ],
+      "collect_as": {
+        "kind": "firmware_version",
+        "component": "BIOS"
+      }
+    },
+    {
+      "id": "bios_vendor",
+      "type": "command",
+      "argv": [
+        "cat",
+        "/sys/class/dmi/id/bios_vendor"
+      ],
+      "collect_as": {
+        "kind": "note"
+      }
+    },
+    {
+      "id": "bmc_fw",
+      "type": "command",
+      "argv": [
+        "ipmitool",
+        "mc",
+        "info"
+      ],
+      "allow_failure": true,
+      "collect_as": {
+        "kind": "ipmitool_mc_info_version",
+        "component": "BMC"
+      }
+    },
+    {
+      "id": "hpm_versions",
+      "type": "command",
+      "argv": [
+        "ipmitool",
+        "hpm",
+        "check"
+      ],
+      "allow_failure": true,
+      "collect_as": {
+        "kind": "ipmitool_hpm_versions"
+      }
+    },
+    {
+      "id": "bmc_lan",
+      "type": "command",
+      "argv": [
+        "ipmitool",
+        "lan",
+        "print",
+        "1"
+      ],
+      "allow_failure": true,
+      "collect_as": {
+        "kind": "ipmitool_lan_ip",
+        "target": "bmc_ip_address"
+      }
+    },
+    {
+      "id": "host_ipv4",
+      "type": "command",
+      "argv": [
+        "ip",
+        "-4",
+        "addr",
+        "show"
+      ],
+      "collect_as": {
+        "kind": "first_non_loopback_ipv4",
+        "target": "host_ipv4_address"
+      }
+    },
+    {
+      "id": "cpu_summary",
+      "type": "command",
+      "argv": [
+        "lscpu"
+      ],
+      "collect_as": {
+        "kind": "note"
+      }
+    },
+    {
+      "id": "memory_summary",
+      "type": "command",
+      "argv": [
+        "free",
+        "-h"
+      ],
+      "collect_as": {
+        "kind": "note"
+      }
+    },
+    {
+      "id": "os_summary",
+      "type": "command",
+      "argv": [
+        "hostnamectl"
+      ],
+      "collect_as": {
+        "kind": "note"
+      }
+    },
+    {
+      "id": "kernel_release",
+      "type": "command",
+      "argv": [
+        "uname",
+        "-r"
+      ],
+      "collect_as": {
+        "kind": "note"
+      }
+    },
+    {
+      "id": "bsp_image",
+      "type": "command",
+      "argv": [
+        "cat",
+        "/etc/issue"
+      ],
+      "collect_as": {
+        "kind": "bsp_image"
+      }
+    },
+    {
+      "id": "nic_inventory_b77p0",
+      "type": "command",
+      "argv": [
+        "ethtool",
+        "-i",
+        "b77p0"
+      ],
+      "allow_failure": true,
+      "collect_as": {
+        "kind": "nic_inventory",
+        "interface": "b77p0"
+      }
+    },
+    {
+      "id": "nic_inventory_bf7p0",
+      "type": "command",
+      "argv": [
+        "ethtool",
+        "-i",
+        "bf7p0"
+      ],
+      "allow_failure": true,
+      "collect_as": {
+        "kind": "nic_inventory",
+        "interface": "bf7p0"
+      }
+    },
+    {
+      "id": "nic_inventory_b91p3",
+      "type": "command",
+      "argv": [
+        "ethtool",
+        "-i",
+        "b91p3"
+      ],
+      "allow_failure": true,
+      "collect_as": {
+        "kind": "nic_inventory",
+        "interface": "b91p3"
+      }
+    },
+    {
+      "id": "tracking_probe",
+      "type": "script",
+      "interpreter": "python3",
+      "local_script": "../common_scripts/collect_tracking_relevant_inventory.py",
+      "allow_failure": true,
+      "collect_as": {
+        "kind": "json_payload",
+        "target": "tracking_probe"
+      }
+    },
+    {
+      "id": "pcie_probe",
+      "type": "script",
+      "interpreter": "python3",
+      "local_script": "../common_scripts/collect_pcie_device_inventory.py",
+      "allow_failure": true,
+      "collect_as": {
+        "kind": "json_payload",
+        "target": "pcie_probe"
+      }
+    },
+    {
+      "id": "operational_probe",
+      "type": "script",
+      "interpreter": "python3",
+      "local_script": "../common_scripts/collect_operational_attention.py",
+      "allow_failure": true,
+      "collect_as": {
+        "kind": "json_payload",
+        "target": "operational_probe"
+      }
+    }
+  ],
+  "probe_plan": {
+    "selected_probe_ids": [
+      "tracking_probe",
+      "pcie_probe",
+      "operational_probe"
+    ],
+    "selected_script_count": 3,
+    "rationale": [
+      "Selected tracking_probe as the baseline script for platform inventory needed by most PM tracking-sheet reviews.",
+      "Selected pcie_probe because the expected hardware BOM includes PCIe-attached devices such as GPU, NIC, or NVMe items.",
+      "Selected operational_probe because shipment review should surface readable health signals when firmware evidence or known issues are involved."
+    ],
+    "focus_areas": [
+      "CPU",
+      "memory",
+      "storage",
+      "GPU inventory",
+      "PCIe device inventory",
+      "operational attention signals"
+    ],
+    "expected_targets": [
+      "System level: SKY642E32501-ES",
+      "Firmware: BIOS",
+      "Firmware: BL",
+      "Firmware: BMC",
+      "Firmware: BMCONF",
+      "Firmware: FPGA",
+      "Firmware: NVRAM",
+      "System Level = SKY642E32501-ES (qty 1)",
+      "CPU board (qty 1)",
+      "CPU = XKLA-CPU-9355 (qty 2)",
+      "Memory = 96D5-64G5600ER-MI2 (qty 16)",
+      "RAID module",
+      "HDD",
+      "M.2 2280 SSD = SQF-C8MV2-256GDEFC (qty 1)",
+      "Carrier board",
+      "Peripheral - NIC Card = XSKY-MCX755106AS (qty 1)",
+      "Peripheral - NIC Card = PCIE-2221BP-00A1E (qty 1)",
+      "Peripheral - GPU Card = SKY-TESL-L20-48P (qty 8)",
+      "PCIe card",
+      "NPI Phase = EVT"
+    ]
+  }
+}

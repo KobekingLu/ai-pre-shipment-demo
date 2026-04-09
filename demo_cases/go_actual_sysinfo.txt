@@ -1,0 +1,12 @@
+System Snapshot
+Project: FWA-5080
+System Level: FWA5080R00A1R-ES
+CPU: EPYC 9355P
+Memory: 128GB DDR5
+Storage: 1TB NVMe
+BIOS: 1.20
+BMC: 0.92
+FPGA: 0.18
+BL: 0.40
+BMCONF: 1.10
+BMC_IP: 10.10.50.8

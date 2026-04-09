@@ -1,0 +1,22 @@
+# Python cache and local environments
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+# Local editor / OS artifacts
+.DS_Store
+Thumbs.db
+
+# Excel temp files
+~$*.xlsx
+
+# Generated outputs
+output/
+
+# Internal docs and large presentation assets
+Document/
+
+# Real customer / AE / PM input data
+input_data/

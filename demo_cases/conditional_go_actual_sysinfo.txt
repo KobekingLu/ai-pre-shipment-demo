@@ -1,0 +1,12 @@
+System Snapshot
+Project: SKY-821E3
+System Level: SKY-821E3-ES
+CPU: EPYC 9655
+Memory: 512GB DDR5
+Storage: 2TB NVMe
+BIOS: 2.10
+BMC: 1.00
+FPGA: 0.20
+BL: 0.42
+# BMCONF intentionally missing
+# BMC_IP intentionally missing

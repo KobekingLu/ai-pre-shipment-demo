@@ -1,0 +1,3 @@
+item,type,description,status,level,resolution,affected_component,affected_version_or_condition
+3,BIOS,ACPI BIOS errors and USB hub configuration error in Linux boot logs,Open,Major,,BIOS,<0.16
+4,BIOS,Console restart prompt missing,Closed,Major,Fixed in BIOS 0.13,BIOS,<0.13
