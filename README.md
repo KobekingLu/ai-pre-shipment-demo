@@ -1,6 +1,17 @@
 # AI Pre-Shipment Risk Decision Agent
 
+> AI agent demo for ES and sample shipment review.  
+> It inspects available evidence, compares expected versus actual data, reviews known issues, and explains why the result is `Go`, `Conditional Go`, or `No-Go`.
+
 This repository is a runnable demo prototype for an internal AI competition. It explores how an AI agent can review shipment readiness before ES or sample shipment by inspecting available evidence, comparing expected versus actual system data, checking known issues, and recommending the next workflow action.
+
+## Repo Banner
+This is the short, front-page message for the repository. On GitHub, it works like the project pitch people see before they scroll into the details.
+
+- Audience: PM, AE, DQA, RD, and demo reviewers
+- Value: faster shipment-risk review with explainable reasoning
+- Output: bilingual HTML review pages plus structured JSON
+- Scope: demo-friendly prototype, not a production release
 
 ## What This Demo Shows
 - Real workbook review flow for PM or AE tracking sheets
@@ -41,6 +52,18 @@ python demo.py
 ```
 
 Generated outputs are written under `output/`, including JSON summaries and bilingual HTML pages.
+
+## Demo Screenshots
+### Overview Page
+![Agent overview page](assets/readme/overview.png)
+
+### Demo Cases
+| Go | Conditional Go |
+| --- | --- |
+| ![Go demo case](assets/readme/go-case.png) | ![Conditional Go demo case](assets/readme/conditional-case.png) |
+
+### Blocking Case
+![No-Go demo case](assets/readme/nogo-case.png)
 
 ## Output Style
 The HTML demo is designed to feel like an AI agent workflow, not just a static report. It highlights:

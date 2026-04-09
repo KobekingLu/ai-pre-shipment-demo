@@ -4,6 +4,7 @@ __pycache__/
 .pytest_cache/
 .venv/
 venv/
+.tmp/
 
 # Local editor / OS artifacts
 .DS_Store
